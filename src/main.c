@@ -17,6 +17,7 @@
 int	main(int ac, char **av, char **env)
 {
 	(void)ac;
+	start_alloc();
 	(void)av;
 	return (0);
 }

@@ -13,11 +13,21 @@
 #define FREE_AND_LIST_H
 #ifdef FREE_AND_LIST_H
 
+#define START 2
+#define END   3
+
 # include "list.h"
 # include <aio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+
+typedef struct s_free_list
+{
+	char *pocket;
+	void *memory;
+
+} t_free_list;
 
 /**
  * @brief this function is used for allocate memory 
@@ -61,4 +71,9 @@ t_list_	*ft_node_new_free(void *n);
 void	ft_remove(t_list_ **node);
 
 t_list_	*free_next(t_list_ *list);
+
+
+
+
+t_list_* get_list_free(int n);
 #endif

@@ -85,15 +85,5 @@ normi:
 	cd ./libft && norminette
 
 s:
-	clear && make re && ./minishell
-v:
-	clear && make re && $(VAL) ./minishell
-e:
-	make re && env -i ./minishell
-b:
-	tmux \; split-window -h \; send-keys 'bash' C-m \; select-pane -t 1 \; send-keys 'make s' C-m \; setw synchronize-panes on
-g:
-	clear && gdb -tui ./minishell
+	clear && make re 
 
-t:
-	make re && cd ./minishell_tester  && ./tester
