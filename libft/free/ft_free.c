@@ -12,33 +12,19 @@
 
 #include "free_and_list.h" 
 
-void	*ft_malloc(size_t size, void *list_set)
+void	*ft_malloc(size_t size, void *pocket)
 {
-	t_list_			*new;
-	static t_list_	*list;
-	void			*mal;
-
-	if (ft_maolloc_next(list_set, list, size) != NULL)
-	{
-		list = ft_maolloc_next(list_set, list, size);
-		return (NULL);
-	}
-	mal = malloc(size);
-	if (mal == NULL)
-	{
-		ft_free_all(NULL);
-		write(2, "error_remove_the_limited_memory_bitch\n", 39);
-		exit(1);
-	}
-	new = ft_node_new_free(mal);
-	if (new == NULL)
-	{
-		ft_free_all(NULL);
-		write(2, "error_remove_the_limited_memory_bitch\n", 39);
-		exit(1);
-	}
-	ft_node_add_front(&list, new);
-	return (new->content);
+	t_list_ *list;
+	t_list_* new_node;
+	list= get_list_free(END);
+	if(pocket == NULL)
+		new_node = ft_node_new_free(inicializ_struct_free("main", size));
+	else 
+		new_node = ft_node_new_free(inicializ_struct_free(pocket, size));
+	if(new_node->content == NULL)
+		ft_free_all(NULL);	
+	ft_node_add_front(&list, new_node);
+	return (new_node->content);
 }
 
 void	ft_free_all(void *list_set)

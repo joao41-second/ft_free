@@ -76,4 +76,6 @@ t_list_	*free_next(t_list_ *list);
 
 
 t_list_* get_list_free(int n);
+
+t_free_list * inicializ_struct_free(char *str,size_t size);
 #endif
