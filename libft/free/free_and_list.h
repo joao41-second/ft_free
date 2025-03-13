@@ -84,6 +84,9 @@ t_list_* get_list_free(int n);
 
 t_free_list * inicializ_struct_free(char *str,size_t size);
 
+
+int chek_pocket_in_list(char *name);
+
 void pocket_new(char *name);
 
 t_list_ *get_pocket_list(int n,char *set);

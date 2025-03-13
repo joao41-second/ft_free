@@ -149,12 +149,10 @@ t_list_ *get_pocket_list(int n,char *set)
 		setd = set;
 	}
 	list_pocket = ft_node_start(list_pocket);
-
 	if(n == SETD && set == NULL ){
 		while (list_pocket != NULL) 
 		{
 
-			printf("ola %s , %s \n",(char *)list_pocket->content,setd);
 			if(ff_strncmp(list_pocket->content, setd, ff_strlen(list_pocket->content)+10) == 0)
 				break;
 			if(list_pocket->next == NULL)
@@ -167,6 +165,7 @@ t_list_ *get_pocket_list(int n,char *set)
 void pocket_new(char *name)
 {
 	t_list_ *list_pocket;
+	t_list_ *new_node;
 	char *dup;
 	dup = ff_strdup(name);
 	if(dup == NULL)
@@ -178,7 +177,9 @@ void pocket_new(char *name)
 		return;
 	}
 	list_pocket = get_pocket_list(END,NULL);
-	ft_node_new_free(dup);
-
+	new_node = ft_node_new_free(dup);
+	if(new_node == NULL)
+		return;
+	ft_node_add_front(&list_pocket,new_node);
 	get_pocket_list(SETD, dup);
 }

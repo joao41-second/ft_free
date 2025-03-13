@@ -34,7 +34,8 @@ t_list_	*ft_maolloc_next(t_list_ *list_set, t_list_ *list, size_t size)
 t_list_	*ft_node_new_free(void *n)
 {
 	t_list_	*new_node;
-
+	if(n == NULL)
+		return NULL;
 	new_node = (t_list_ *)malloc(1 * sizeof(t_list_));
 	if (new_node == NULL)
 		return (NULL);
