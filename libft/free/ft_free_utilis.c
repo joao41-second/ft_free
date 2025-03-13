@@ -6,7 +6,7 @@
 /*   By: jperpct <jperpect@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 14:16:04 by jperpct           #+#    #+#             */
-/*   Updated: 2024/11/29 14:27:19 by jperpct          ###   ########.fr       */
+/*   Updated: 2025/03/13 16:25:15 by jperpct          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ t_list_	*free_next(t_list_ *list)
 	if (list->next == NULL )
 	{
 		ft_remove(&list);
-		ft_malloc(134, list);
 	}
 	else if (list->next != NULL && list->previous != NULL)
 		ft_emove(&list);

@@ -6,7 +6,7 @@
 /*   By: jperpct <jperpect@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 10:33:39 by jperpct           #+#    #+#             */
-/*   Updated: 2024/11/29 14:24:24 by jperpct          ###   ########.fr       */
+/*   Updated: 2025/03/13 16:25:37 by jperpct          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,12 @@ void ft_free_all_pocket(char *name_pocket)
 	while (list != NULL)
 	{
 		pocket = list->content;
-		printf("char n_pok %s pok %s\n",name_pocket,pocket->pocket);
 		if(ff_strncmp(pocket->pocket, name_pocket, ff_strlen(pocket->pocket)+10) == 0)
 		{
-			printf("oi\n");
-			ft_free(pocket->memory,NULL);
+
+			free_struct_free(list->content);
+			list->content = NULL;
+			list = free_next(list);
 		}
 		list = list->next;
 	}
