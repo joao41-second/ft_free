@@ -17,6 +17,8 @@ void	*ft_malloc(size_t size, void *pocket)
 	t_list_ *list;
 	t_list_* new_node;
 	t_list_ *pocket_setd;
+	t_free_list *pocket_var;
+
 	list= get_list_free(END);
 	pocket_setd = get_pocket_list(SETD, NULL);
 	if(pocket_setd == NULL)
@@ -30,7 +32,8 @@ void	*ft_malloc(size_t size, void *pocket)
 	if(new_node->content == NULL)
 		ft_free_all(NULL);	
 	ft_node_add_front(&list, new_node);
-	return (new_node->content);
+	pocket_var = new_node->content;
+	return (pocket_var->memory);
 }
 
 void	ft_free_all(void *list_set)
@@ -62,20 +65,19 @@ void	ft_free_all(void *list_set)
 
 void	ft_free(void *var, void *list_set)
 {
-	static t_list_	*list;
+	t_list_	*list;
 	t_list_			*temp;
+	t_free_list *pocket;
 
-	if (list == NULL && list_set != NULL)
-	{
-		list = list_set;
-		return ;
-	}
+	list_set = NULL;
+	list = get_list_free(START);
 	temp = list;
 	while (list != NULL)
 	{
-		if (list->content == var)
+		pocket = list->content;
+		if (pocket->memory == var)
 		{
-			free(list->content);
+			free_struct_free(list->content);
 			list->content = NULL;
 			var = NULL;
 			list = free_next(list);
@@ -86,15 +88,27 @@ void	ft_free(void *var, void *list_set)
 	list = temp;
 }
 
+void ft_free_all_pocket(char *name_pocket)
+{
+	t_list_	*list;
+	t_free_list *pocket;
+
+	list = get_list_free(START);
+	while (list != NULL)
+	{
+		pocket = list->content;
+		printf("char n_pok %s pok %s\n",name_pocket,pocket->pocket);
+		if(ff_strncmp(pocket->pocket, name_pocket, ff_strlen(pocket->pocket)+10) == 0)
+		{
+			printf("oi\n");
+			ft_free(pocket->memory,NULL);
+		}
+		list = list->next;
+	}
+}
+
 void	start_alloc(void)
 {
-
 	 get_list_free(0);
 	 get_pocket_list(0, NULL);
-	//t_list_	*list;
-
-	//list = ft_node_new_free(malloc(sizeof(t_list_)));
-	//ft_malloc(3, list);
-	//ft_free_all(list);
-	//ft_free(NULL, list);
 }

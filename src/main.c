@@ -54,6 +54,7 @@ void print_pocket_list()
 int	main(int ac, char **av, char **env)
 {
 	(void)ac;
+	char *ok;
 	start_alloc();
 
 	ft_malloc(10,NULL);
@@ -63,10 +64,9 @@ int	main(int ac, char **av, char **env)
 	ft_malloc(10,"main");
 	ft_malloc(10,NULL);
 	pocket_new("ola2");
-	ft_malloc(10,NULL);
+	ok = ft_malloc(10,NULL);
 	ft_malloc(10,NULL);
 	ft_malloc(10,"ola");
-
 	pocket_new("ola2");
 	pocket_new("ola3");
 	pocket_new("ola4");
@@ -74,6 +74,10 @@ int	main(int ac, char **av, char **env)
 
 //	t_list_ *list = get_pocket_list(SETD,NULL);
 	print_pocket_list();
+	print_free_list();
+	ft_free_all_pocket("ola");
+	ft_free(ok,NULL);
+	printf("\n");
 	print_free_list();
 //	ft_printf("list peketd is %s ",list->content);
 	(void)av;
