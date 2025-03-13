@@ -24,9 +24,10 @@ void	*ft_malloc(size_t size, void *pocket)
 	if(pocket == NULL)
 		new_node = ft_node_new_free(inicializ_struct_free(get_pocket_list(SETD, NULL)->content, size));
 	else if(chek_pocket_in_list(pocket) == TRUE)
-			new_node = ft_node_new_free(inicializ_struct_free(pocket, size));
+		new_node = ft_node_new_free(inicializ_struct_free(pocket, size));
 	else 
 		return (write(2,"error: pocket not valid\n",25),NULL);
+
 	if(new_node->content == NULL)
 		ft_free_all(NULL);	
 	ft_node_add_front(&list, new_node);

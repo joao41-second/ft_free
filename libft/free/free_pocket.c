@@ -111,10 +111,12 @@ t_list_* get_list_free(int n)
 int chek_pocket_in_list(char *name)
 {
 
-	static t_list_ *list_pocket;
-	get_pocket_list(START, NULL);
+	printf("star pocket %s \n",name);
+	t_list_ *list_pocket;
+ 	list_pocket = get_pocket_list(START, NULL);
 	while (list_pocket != NULL) 
 	{
+		printf("ola %s \n",(char *)list_pocket->content);
 		if(ff_strncmp(list_pocket->content, name, ff_strlen(list_pocket->content)+10) == 0)
 			return (TRUE);
 		list_pocket = list_pocket->next;
@@ -140,12 +142,18 @@ t_list_ *get_pocket_list(int n,char *set)
 			return(free(list_pocket),NULL);
 	}
 	if(n == END)
+	{
 		list_pocket = ft_node_end(list_pocket);
+		return (list_pocket);
+	}
 	if(n == START)
+	{
 		list_pocket = ft_node_start(list_pocket);
+		return (list_pocket);
+	}
 	if(n == SETD && set != NULL)
 	{
-		free(setd);
+		//free(setd);
 		setd = set;
 	}
 	list_pocket = ft_node_start(list_pocket);
@@ -167,6 +175,8 @@ void pocket_new(char *name)
 	t_list_ *list_pocket;
 	t_list_ *new_node;
 	char *dup;
+	if(chek_pocket_in_list(name) == TRUE)
+		return;
 	dup = ff_strdup(name);
 	if(dup == NULL)
 		return;
