@@ -64,10 +64,11 @@ void free_struct_free(t_free_list *node)
 t_free_list * inicializ_struct_free(char *str,size_t size)
 {
 	t_free_list *node;
-	char *copy;
 	int i;
 
 	i=-1;
+	if(str == NULL)
+		return (NULL);
 	node = malloc(sizeof(t_free_list)*1);
 	if(node == NULL)
 		return(NULL);
@@ -75,15 +76,10 @@ t_free_list * inicializ_struct_free(char *str,size_t size)
 		node->memory = malloc(size);
 	else
 		return (free(node),NULL);
-	copy = malloc(ff_strlen(str)+1*sizeof(char));
-	if(copy == NULL)	
-		return (free(node->memory),free(node), NULL);	
 	node->pocket = str;
-	while (str[++i] != '\0') 
-	 copy[i] = str[i];
-	copy[i]= '\0';
 	return (node);
 }
+
 
 t_list_* get_list_free(int n)
 {
@@ -91,10 +87,10 @@ t_list_* get_list_free(int n)
 	t_free_list *list_free;
 	if(list == NULL)
 	{
-		list_free = inicializ_struct_free("main", 5);
+		list_free = inicializ_struct_free(ff_strdup("main"), 5);
 		if(list_free == NULL)
 			return (NULL);
-		list = ft_node_new_free(inicializ_struct_free("main", 5));
+		list = ft_node_new_free(list_free);
 		if(list->content == NULL)
 		{
 			free(list);
@@ -128,18 +124,22 @@ t_list_ *get_pocket_list(int n,char *set)
 {
 	static t_list_ *list_pocket;
 	static char *setd;
-	char *star;
+	char *star = NULL;
+	if(n == FREE)
+	{
+		return (NULL);
+	}
 	if( list_pocket == NULL)
 	{
 		star = ff_strdup("main");
 		if(star == NULL)
 			return NULL;
-		setd = ff_strdup("main");
+		setd = star;
 		if(star == NULL)
 			return NULL;
 		list_pocket = ft_node_new_free(star);
 		if(list_pocket == NULL)
-			return(free(list_pocket),NULL);
+			return(free(star),free(list_pocket),NULL);
 	}
 	if(n == END)
 	{
@@ -153,7 +153,6 @@ t_list_ *get_pocket_list(int n,char *set)
 	}
 	if(n == SETD && set != NULL)
 	{
-		//free(setd);
 		setd = set;
 	}
 	list_pocket = ft_node_start(list_pocket);

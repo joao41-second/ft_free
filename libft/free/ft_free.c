@@ -22,12 +22,11 @@ void	*ft_malloc(size_t size, void *pocket)
 	if(pocket_setd == NULL)
 		ft_free_all(NULL);	
 	if(pocket == NULL)
-		new_node = ft_node_new_free(inicializ_struct_free(get_pocket_list(SETD, NULL)->content, size));
+		new_node = ft_node_new_free(inicializ_struct_free(ff_strdup( get_pocket_list(SETD, NULL)->content), size));
 	else if(chek_pocket_in_list(pocket) == TRUE)
-		new_node = ft_node_new_free(inicializ_struct_free(pocket, size));
+		new_node = ft_node_new_free(inicializ_struct_free(ff_strdup(pocket), size));
 	else 
 		return (write(2,"error: pocket not valid\n",25),NULL);
-
 	if(new_node->content == NULL)
 		ft_free_all(NULL);	
 	ft_node_add_front(&list, new_node);
@@ -36,15 +35,21 @@ void	*ft_malloc(size_t size, void *pocket)
 
 void	ft_free_all(void *list_set)
 {
-	static t_list_	*list = NULL;
+	t_list_	*list;
 	t_list_			*temp;
+	(void)list_set;
 
-	if (list == NULL && list_set != NULL)
+	list = get_list_free(START);
+
+	while (list != NULL)
 	{
-		list = list_set;
-		return ;
+		temp = list->next;
+		if (list->content != NULL)
+			free_struct_free(list->content);
+		free(list);
+		list = temp;
 	}
-	list = ft_node_start(list);
+	list = get_pocket_list(START, NULL);
 	while (list != NULL)
 	{
 		temp = list->next;
@@ -53,6 +58,7 @@ void	ft_free_all(void *list_set)
 		free(list);
 		list = temp;
 	}
+	get_pocket_list(FREE,NULL);
 }
 
 void	ft_free(void *var, void *list_set)

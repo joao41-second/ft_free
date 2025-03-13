@@ -77,5 +77,6 @@ int	main(int ac, char **av, char **env)
 	print_free_list();
 //	ft_printf("list peketd is %s ",list->content);
 	(void)av;
+	ft_free_all(NULL);
 	return (0);
 }

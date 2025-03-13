@@ -16,10 +16,11 @@
 #define START 2
 #define END   3
 #define SETD  5
+
+# define FREE 8
+
 # define TRUE 0
 # define FALSE 1
-
-
 
 # include "list.h"
 # include <aio.h>
@@ -77,8 +78,7 @@ void	ft_remove(t_list_ **node);
 
 t_list_	*free_next(t_list_ *list);
 
-
-
+void free_struct_free(t_free_list *node);
 
 t_list_* get_list_free(int n);
 
@@ -90,5 +90,9 @@ int chek_pocket_in_list(char *name);
 void pocket_new(char *name);
 
 t_list_ *get_pocket_list(int n,char *set);
+
+// str
+
+char *ff_strdup(char *str);
 
 #endif
