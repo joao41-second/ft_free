@@ -6,7 +6,7 @@
 /*   By: jperpct <jperpect@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 11:19:37 by jperpct           #+#    #+#             */
-/*   Updated: 2024/11/29 14:23:55 by jperpct          ###   ########.fr       */
+/*   Updated: 2025/03/13 16:30:23 by jperpct          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void pocket_new(char *name);
 t_list_ *get_pocket_list(int n,char *set);
 
 void ft_free_all_pocket(char *name_pocket);
+
+void ft_pocket_set(char *name);
 
 // str
 

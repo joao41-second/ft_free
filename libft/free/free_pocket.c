@@ -9,6 +9,7 @@
 /* ************************************************************************** */
 
 #include "free_and_list.h" 
+#include <signal.h>
 #include <stdlib.h>
 
 int ff_strlen(char *str)
@@ -155,6 +156,15 @@ t_list_ *get_pocket_list(int n,char *set)
 		}}
 	return (list_pocket);
 }
+
+void ft_pocket_set(char *name)
+{
+	if(chek_pocket_in_list(name) == TRUE)
+		get_pocket_list(SETD, name);
+	else
+	 write(2,"error: the name not valid\n",27);
+}
+
 
 void pocket_new(char *name)
 {

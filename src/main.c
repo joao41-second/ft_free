@@ -6,7 +6,7 @@
 /*   By: rpires-c <rpires-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 13:12:18 by jperpect          #+#    #+#             */
-/*   Updated: 2025/01/16 11:32:58 by jperpct          ###   ########.fr       */
+/*   Updated: 2025/03/13 16:31:20 by jperpct          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	main(int ac, char **av, char **env)
 	ft_malloc(10,NULL);
 	pocket_new("ola2");
 	ok = ft_malloc(10,NULL);
+	ft_pocket_set("main");
 	ft_malloc(10,NULL);
 	ft_malloc(10,"ola");
 	pocket_new("ola2");
