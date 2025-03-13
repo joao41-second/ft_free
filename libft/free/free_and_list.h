@@ -15,6 +15,11 @@
 
 #define START 2
 #define END   3
+#define SETD  5
+# define TRUE 0
+# define FALSE 1
+
+
 
 # include "list.h"
 # include <aio.h>
@@ -78,4 +83,9 @@ t_list_	*free_next(t_list_ *list);
 t_list_* get_list_free(int n);
 
 t_free_list * inicializ_struct_free(char *str,size_t size);
+
+void pocket_new(char *name);
+
+t_list_ *get_pocket_list(int n,char *set);
+
 #endif

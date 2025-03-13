@@ -78,6 +78,7 @@ void	start_alloc(void)
 {
 
 	 get_list_free(0);
+	 get_pocket_list(0, NULL);
 	//t_list_	*list;
 
 	//list = ft_node_new_free(malloc(sizeof(t_list_)));

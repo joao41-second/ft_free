@@ -1,5 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   free_pocket.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
@@ -22,6 +20,37 @@ int ff_strlen(char *str)
 		i++;
 	}
 	return (i);
+}
+
+int	ff_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t	a;
+
+	a = 0;
+	if (n == 0)
+		return (0);
+	while ((s1[a] != '\0' && s2[a] != '\0') && a < n - 1)
+	{
+		if (s1[a] != s2[a])
+			return ((unsigned char)s1[a] - (unsigned char)s2[a]);
+		a++;
+	}
+	return ((unsigned char)s1[a] - (unsigned char)s2[a]);
+}
+
+char *ff_strdup(char *str)
+{
+	char *dup;
+	int i;
+
+	i = -1;
+	dup = malloc(ff_strlen(str)+1*sizeof(char));
+	if(dup == NULL)
+		return (NULL);
+	while (str[++i] != '\0') 
+	 dup[i] = str[i];
+	dup[i]= '\0';
+	return (dup);	
 }
 
 void free_struct_free(t_free_list *node)
@@ -59,8 +88,12 @@ t_free_list * inicializ_struct_free(char *str,size_t size)
 t_list_* get_list_free(int n)
 {
 	static t_list_ * list;
+	t_free_list *list_free;
 	if(list == NULL)
 	{
+		list_free = inicializ_struct_free("main", 5);
+		if(list_free == NULL)
+			return (NULL);
 		list = ft_node_new_free(inicializ_struct_free("main", 5));
 		if(list->content == NULL)
 		{
@@ -73,4 +106,79 @@ t_list_* get_list_free(int n)
 	if(n == START)
 		list = ft_node_start(list);
 	return(list);
+}
+
+int chek_pocket_in_list(char *name)
+{
+
+	static t_list_ *list_pocket;
+	get_pocket_list(START, NULL);
+	while (list_pocket != NULL) 
+	{
+		if(ff_strncmp(list_pocket->content, name, ff_strlen(list_pocket->content)+10) == 0)
+			return (TRUE);
+		list_pocket = list_pocket->next;
+	}
+	return (FALSE);
+}
+
+t_list_ *get_pocket_list(int n,char *set)
+{
+	static t_list_ *list_pocket;
+	static char *setd;
+	char *star;
+	if( list_pocket == NULL)
+	{
+		star = ff_strdup("main");
+		if(star == NULL)
+			return NULL;
+		setd = ff_strdup("main");
+		if(star == NULL)
+			return NULL;
+		list_pocket = ft_node_new_free(star);
+		if(list_pocket == NULL)
+			return(free(list_pocket),NULL);
+	}
+	if(n == END)
+		list_pocket = ft_node_end(list_pocket);
+	if(n == START)
+		list_pocket = ft_node_start(list_pocket);
+	if(n == SETD && set != NULL)
+	{
+		free(setd);
+		setd = set;
+	}
+	list_pocket = ft_node_start(list_pocket);
+
+	if(n == SETD && set == NULL ){
+		while (list_pocket != NULL) 
+		{
+
+			printf("ola %s , %s \n",(char *)list_pocket->content,setd);
+			if(ff_strncmp(list_pocket->content, setd, ff_strlen(list_pocket->content)+10) == 0)
+				break;
+			if(list_pocket->next == NULL)
+				break;
+			list_pocket = list_pocket->next;
+		}}
+	return (list_pocket);
+}
+
+void pocket_new(char *name)
+{
+	t_list_ *list_pocket;
+	char *dup;
+	dup = ff_strdup(name);
+	if(dup == NULL)
+		return;
+	list_pocket = get_pocket_list(START,NULL);
+	if(chek_pocket_in_list(name) == TRUE)
+	{
+		write(2,"error: this pocket name is used\n",26);
+		return;
+	}
+	list_pocket = get_pocket_list(END,NULL);
+	ft_node_new_free(dup);
+
+	get_pocket_list(SETD, dup);
 }

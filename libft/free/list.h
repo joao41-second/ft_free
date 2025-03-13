@@ -117,4 +117,7 @@ void				*get_index(void *pointer, void *index);
  * @return 
  */
 t_list_				*get_list_index(t_list_ *list, int index);
+
+
+void	ft_add_node_list(t_list_ **list, void *content);
 #endif

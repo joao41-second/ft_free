@@ -12,36 +12,14 @@
 
 #include "free_and_list.h"
 
-// void	ft_print_list(t_list_ *list, t_list_ *list_b)ategoria-produto
-// {
-// 	char	ola[33];
+void	ft_add_node_list(t_list_ **list, void *content)
+{
+	t_list_	*new;
 
-// 	ft_printf(" \n--------start ----- \n");
-// 	if (list != NULL)
-// 		list = ft_node_start(list);
-// 	if (list_b != NULL)
-// 		list_b = ft_node_start(list_b);
-// 	while (list != NULL)
-// 	{
-// 		ft_printf("a %d ", list->number);
-// 		ft_str_btis(32, list->index, ola);
-// 		ola[32] = '\0';
-// 		ft_printf(" index  = %s ", ola);
-// 		ft_printf("\n");
-// 		list = list->next;
-// 	}
-// 	ft_printf("\n");
-// 	while (list_b != NULL)
-// 	{
-// 		ft_printf("b %d ", list_b->number);
-// 		ft_str_btis(32, list_b->index, ola);
-// 		ola[32] = '\0';
-// 		ft_printf(" index  = %s ", ola);
-// 		ft_printf("\n");
-// 		list_b = list_b->next;
-// 	}
-// 	ft_printf(" \n--------fim ----- \n");
-// }
+	new = ft_node_new(content);
+	*list = ft_node_end(*list);
+	ft_node_add_front(list, new);
+}
 
 void	ft_node_add_inver(t_list_ **lst, t_list_ *new)
 {
