@@ -125,10 +125,6 @@ t_list_ *get_pocket_list(int n,char *set)
 	static t_list_ *list_pocket;
 	static char *setd;
 	char *star = NULL;
-	if(n == FREE)
-	{
-		return (NULL);
-	}
 	if( list_pocket == NULL)
 	{
 		star = ff_strdup("main");
@@ -142,24 +138,15 @@ t_list_ *get_pocket_list(int n,char *set)
 			return(free(star),free(list_pocket),NULL);
 	}
 	if(n == END)
-	{
-		list_pocket = ft_node_end(list_pocket);
-		return (list_pocket);
-	}
+		return(ft_node_end(list_pocket));
 	if(n == START)
-	{
-		list_pocket = ft_node_start(list_pocket);
-		return (list_pocket);
-	}
+		return(ft_node_start(list_pocket));
 	if(n == SETD && set != NULL)
-	{
 		setd = set;
-	}
 	list_pocket = ft_node_start(list_pocket);
 	if(n == SETD && set == NULL ){
 		while (list_pocket != NULL) 
 		{
-
 			if(ff_strncmp(list_pocket->content, setd, ff_strlen(list_pocket->content)+10) == 0)
 				break;
 			if(list_pocket->next == NULL)

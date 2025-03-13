@@ -58,7 +58,6 @@ void	ft_free_all(void *list_set)
 		free(list);
 		list = temp;
 	}
-	get_pocket_list(FREE,NULL);
 }
 
 void	ft_free(void *var, void *list_set)
