@@ -6,7 +6,7 @@
 #    By: rui <rui@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 06:17:31 by jperpect          #+#    #+#              #
-#    Updated: 2025/03/14 22:41:25 by jperpct          ###   ########.fr        #
+#    Updated: 2025/03/14 22:48:59 by jperpct          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ Libft_dir = ./libft/libft
 libft = $(Libft_dir)/libft
 
 
-FLGS_LIB = $(Libft_dir)/libft.a ./libft/free/ft_free.a ./libft/list_/lsit.a
+FLGS_LIB = $(Libft_dir)/libft.a ./libft/free/ft_free.a ./libft/list_/lsit.a ./libft/printf/libftprintf.a
 FLGS = $(WFLGS) $(READ_FLG) 
 
 VAL = valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --trace-children=yes --suppressions=readline.supp 
@@ -58,6 +58,8 @@ $(NAME): $(OBJS)
 	cd libft/free && make 
 	cd libft/libft && make bonus
 	cd libft/list_ && make 
+	cd libft/printf && make
+	cd libft/Get_next_line && make
 	$(CC) $(OBJS)  $(FLGS_LIB) $(FLGS) -o $(NAME)
 	@echo "╔══════════════════════════╗"
 	@echo "║ ✅ Compiled Successfully!║"
@@ -78,6 +80,8 @@ clean:
 	cd ./libft/libft/ && make clean
 	cd ./libft/free/  && make clean
 	cd ./libft/list_/  && make clean
+	cd ./libft/printf/  && make clean
+	cd ./libft/Get_next_line/ && make clean
 
 fclean: clean
 	$(RM) $(NAME)
