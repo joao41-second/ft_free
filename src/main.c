@@ -71,7 +71,7 @@ int	main(int ac, char **av, char **env)
 	pocket_new("ola2");
 	pocket_new("ola3");
 	pocket_new("ola4");
-
+	ft_add_memory(malloc(10*10), "main");
 
 //	t_list_ *list = get_pocket_list(SETD,NULL);
 	print_pocket_list();

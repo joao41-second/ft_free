@@ -11,25 +11,7 @@
 /* ************************************************************************** */
 
 #include "./free_and_list.h"
-
-t_list_	*ft_maolloc_next(t_list_ *list_set, t_list_ *list, size_t size)
-{
-	if (list_set != NULL && size == 134)
-	{
-		list = list_set;
-		return (list);
-	}
-	if (list_set != NULL && list == NULL)
-	{
-		list = list_set;
-		return (list);
-	}
-	if (list == NULL)
-	{
-		write(2, "error\n", 7);
-	}
-	return (NULL);
-}
+#include <unistd.h>
 
 t_list_	*ft_node_new_free(void *n)
 {
@@ -81,4 +63,33 @@ t_list_	*free_next(t_list_ *list)
 	else if (list->next != NULL && list->previous != NULL)
 		ft_emove(&list);
 	return (list);
+}
+
+void *ft_add_memory(void *memory,char *pocket)
+{
+	t_list_ *new_node;
+	t_free_list *node;
+	t_list_ *list;
+
+	if(chek_pocket_in_list(pocket) == TRUE || pocket == NULL)
+	{
+		node = malloc(1*(sizeof(t_free_list)));
+		if(node == NULL)
+			ft_free_all(NULL);
+		if(pocket == NULL)
+			node->pocket = ff_strdup("main");
+		else
+			node->pocket = ff_strdup(pocket);
+		if(node == NULL)
+			return (free(node),ft_free_all(NULL),NULL);
+		node->memory = memory;
+	}
+	list = get_list_free(END);	
+	if(pocket == NULL)
+		new_node = ft_node_new_free(node);
+	else if(chek_pocket_in_list(pocket) == TRUE)
+		new_node = ft_node_new_free(node);
+	else 
+		return (write(2,"error: pocket not valid\n",25),NULL);
+	return (ft_node_add_front(&list, new_node),memory);
 }

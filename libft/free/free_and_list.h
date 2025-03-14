@@ -86,6 +86,8 @@ t_list_* get_list_free(int n);
 
 t_free_list * inicializ_struct_free(char *str,size_t size);
 
+void *ft_add_memory(void *memory,char *pocket);
+
 int chek_pocket_in_list(char *name);
 
 void pocket_new(char *name);
