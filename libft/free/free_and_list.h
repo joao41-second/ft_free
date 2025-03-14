@@ -53,13 +53,13 @@ void	ft_free_all(void *list_set);
  * @param var for free memory
  * @param list_set set ins null
  */
-void	ft_free(void *var, void *list_set);
+void	ft_free(void *var);
 
 /**
  * @brief the start the library the malloc not use not 
  * possible use neither the all function
  */
-void	start_alloc(void);
+void	ft_start_alloc(void);
 
 /**
  * @brief alloc the memory reght for Created new node t_list_

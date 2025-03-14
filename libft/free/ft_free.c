@@ -63,13 +63,12 @@ void	ft_free_all(void *list_set)
 	}
 }
 
-void	ft_free(void *var, void *list_set)
+void	ft_free(void *var)
 {
 	t_list_	*list;
 	t_list_			*temp;
 	t_free_list *pocket;
 
-	list_set = NULL;
 	list = get_list_free(START);
 	temp = list;
 	while (list != NULL)
@@ -108,7 +107,7 @@ void ft_free_all_pocket(char *name_pocket)
 	}
 }
 
-void	start_alloc(void)
+void	ft_start_alloc(void)
 {
 	 get_list_free(0);
 	 get_pocket_list(0, NULL);

@@ -9,7 +9,6 @@
 /* ************************************************************************** */
 
 #include "free_and_list.h" 
-#include <signal.h>
 #include <stdlib.h>
 
 int ff_strlen(char *str)
@@ -65,9 +64,7 @@ void free_struct_free(t_free_list *node)
 t_free_list * inicializ_struct_free(char *str,size_t size)
 {
 	t_free_list *node;
-	int i;
 
-	i=-1;
 	if(str == NULL)
 		return (NULL);
 	node = malloc(sizeof(t_free_list)*1);

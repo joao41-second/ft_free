@@ -25,7 +25,7 @@ void	free_list(t_list_ *list, void (*free_struct)(void*))
 		temp = list->next;
 		(free_struct)(list);
 		if (list != NULL)
-			ft_free(list, NULL);
+			ft_free(list);
 		list = temp;
 	}
 }
@@ -46,7 +46,7 @@ void	ft_free_node(t_list_ **list, void (*free_struct)(void*))
 			next->previous = priv;
 		if (priv != NULL)
 			priv->next = next;
-		ft_free(*list, NULL);
+		ft_free(*list);
 		if (next != NULL)
 			*list = next;
 		else if (priv != NULL)

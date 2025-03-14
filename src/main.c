@@ -55,7 +55,7 @@ int	main(int ac, char **av, char **env)
 {
 	(void)ac;
 	char *ok;
-	start_alloc();
+	ft_start_alloc();
 
 	ft_malloc(10,NULL);
 	ft_malloc(10,NULL);
@@ -77,7 +77,7 @@ int	main(int ac, char **av, char **env)
 	print_pocket_list();
 	print_free_list();
 	ft_free_all_pocket("ola");
-	ft_free(ok,NULL);
+	ft_free(ok);
 	printf("\n");
 	print_free_list();
 //	ft_printf("list peketd is %s ",list->content);

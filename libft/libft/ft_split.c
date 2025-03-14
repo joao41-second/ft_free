@@ -22,10 +22,10 @@ static char	**alloc_p(int n, int id, char **ren)
 	{
 		while (i < id)
 		{
-			ft_free(ren[i], NULL);
+			ft_free(ren[i]);
 			i++;
 		}
-		ft_free(ren, NULL);
+		ft_free(ren);
 		return (NULL);
 	}
 	return (ren);
@@ -121,7 +121,7 @@ char	**ft_split(char const *s, char c)
 	ren[n_p] = NULL;
 	if (n_p + 1 == 1)
 		return (ren);
-	ft_free(ren[n_p], NULL);
+	ft_free(ren[n_p]);
 	if (ft_strlen(s) != 0)
 	{
 		conta_len(s, c, ren);
