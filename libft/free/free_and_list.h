@@ -46,7 +46,7 @@ void	*ft_malloc(size_t size, void *list_set);
  * @brief this function is used to free memory of the program 
  * @param list_set set is null
  */
-void	ft_free_all(void *list_set);
+void	ft_free_all();
 
 /**
  * @brief this function is used for free in specifly variabel
@@ -90,7 +90,7 @@ void *ft_add_memory(void *memory,char *pocket);
 
 int chek_pocket_in_list(char *name);
 
-void pocket_new(char *name);
+void ft_pocket_new(char *name);
 
 t_list_ *get_pocket_list(int n,char *set);
 

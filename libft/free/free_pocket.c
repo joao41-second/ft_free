@@ -163,7 +163,7 @@ void ft_pocket_set(char *name)
 }
 
 
-void pocket_new(char *name)
+void ft_pocket_new(char *name)
 {
 	t_list_ *list_pocket;
 	t_list_ *new_node;
