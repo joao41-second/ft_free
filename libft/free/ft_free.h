@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_and_list.h                                    :+:      :+:    :+:   */
+/*   ft_free.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jperpct <jperpect@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 11:19:37 by jperpct           #+#    #+#             */
-/*   Updated: 2025/03/13 16:30:23 by jperpct          ###   ########.fr       */
+/*   Updated: 2025/03/14 22:32:47 by jperpct          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,7 @@
 # include <unistd.h>
 # include <stdio.h>
 
-typedef struct s_list_
-{
-	void			*content;
-	struct s_list_	*next;
-	struct s_list_	*previous;
-}					t_list_;
-
-
+#include "lsit_struct.h"
 
 typedef struct s_free_list
 {

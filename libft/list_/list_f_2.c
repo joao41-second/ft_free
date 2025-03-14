@@ -6,11 +6,11 @@
 /*   By: rpires-c <rpires-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 13:59:42 by jperpect          #+#    #+#             */
-/*   Updated: 2024/11/05 11:05:20 by jperpct          ###   ########.fr       */
+/*   Updated: 2025/03/14 22:30:47 by jperpct          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "free_and_list.h"
+#include "list.h"
 
 void	ft_add_node_list(t_list_ **list, void *content)
 {

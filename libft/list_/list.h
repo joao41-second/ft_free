@@ -6,7 +6,7 @@
 /*   By: rpires-c <rpires-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 11:20:32 by jperpct           #+#    #+#             */
-/*   Updated: 2024/11/05 11:21:00 by jperpct          ###   ########.fr       */
+/*   Updated: 2025/03/14 22:31:41 by jperpct          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,8 @@
 #define LIST_H
 
 # include <stdio.h>
-//#include "free.h"
-
-typedef struct s_list_
-{
-	void			*content;
-	struct s_list_	*next;
-	struct s_list_	*previous;
-}					t_list_;
+# include "../free/ft_free.h"
+# include "list.h"
 
 /**
  * @brief create new node int the linst 

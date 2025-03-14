@@ -6,11 +6,11 @@
 /*   By: rui <rui@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 14:30:04 by jperpct           #+#    #+#             */
-/*   Updated: 2024/12/13 17:07:07 by rui              ###   ########.fr       */
+/*   Updated: 2025/03/14 22:30:52 by jperpct          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "free_and_list.h"
+#include "list.h"
 #include <unistd.h>
 
 void	free_list(t_list_ *list, void (*free_struct)(void*))

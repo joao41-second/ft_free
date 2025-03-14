@@ -6,7 +6,7 @@
 #    By: jperpect <jperpect@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 06:17:31 by jperpect          #+#    #+#              #
-#    Updated: 2024/11/29 14:25:46 by jperpct          ###   ########.fr        #
+#    Updated: 2025/03/14 22:37:43 by jperpct          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,10 +100,3 @@ fclean: clean
 
 re: fclean all
 
-exec:
-	cc	-g $(FLGS)  $(SRCS) $(BONUS) -lbsd
-		@rm -f $(COUNT_FILE)
-
-norm: 
-	yes y | python3 -m c_formatter_42 -c $(SRCS)
-		@rm -f $(COUNT_FILE)
