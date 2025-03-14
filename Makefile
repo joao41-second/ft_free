@@ -12,8 +12,14 @@
 
 # Compiler flags
 #WFLGS = -Wall -Wextra -Werror
-READ_FLG = -g 
-FLGS = $(WFLGS) $(READ_FLG)
+#READ_FLG = -g 
+
+Libft_dir = ./libft/libft
+libft = $(Libft_dir)/libft
+
+
+FLGS_LIB = $(Libft_dir)/libft.a ./libft/free/ft_free.a
+FLGS = $(WFLGS) $(READ_FLG) 
 
 VAL = valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --trace-children=yes --suppressions=readline.supp 
 
@@ -27,7 +33,7 @@ SRCS = $(shell find src -name '*.c')
 OBJS = $(patsubst src/%.c,$(OBJDIR)/%.o,$(SRCS))
 
 # Libraries
-LIB = ./libft/libft.a ./libft/libftprintf.a ./libft/get_next_line.a 
+LIB = ./libft/libft/libft.a 
 
 # Commands
 AR = ar rcs
@@ -49,8 +55,8 @@ $(OBJDIR)/%.o: src/%.c
 
 # Main target
 $(NAME): $(OBJS)
-	cd libft && make compile && make
-	$(CC) $(FLGS) $(OBJS) $(LIB) -lreadline -o $(NAME)
+	cd libft/libft && make bonus
+	$(CC) $(OBJS)  $(FLGS_LIB) $(FLGS) -o $(NAME)
 	@echo "╔══════════════════════════╗"
 	@echo "║ ✅ Compiled Successfully!║"
 	@echo "╚══════════════════════════╝"
@@ -67,7 +73,7 @@ all: $(NAME)
 
 clean:
 	$(RM) -r $(OBJDIR)
-	cd ./libft && make clean
+	cd ./libft/libft/ && make clean
 
 fclean: clean
 	$(RM) $(NAME)

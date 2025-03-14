@@ -10,15 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef MINISHELL_H
 #define MINISHELL_H
-#ifdef MINISHELL_H
 
 # define TRUE 0
 # define FALSE 1
 
+//# include "../libft/free/ft_free.h"
 # include "../libft/Get_next_line/get_next_line_bonus.h"
 # include "../libft/printf/ft_printf.h"
 # include "../libft/libft/libft.h"
+# include "../libft/free/ft_free.h"
 # include <fcntl.h>
 # include <limits.h>
 # include <stdio.h>

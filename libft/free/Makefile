@@ -12,11 +12,11 @@
 
 FLGS = -Wall -Wextra -Werror
 
-NAME =	free_and_list.a
+NAME =	ft_free.a
 
 AR = ar rcs
 
-SRCS = list_f.c list_f_2.c ft_free.c
+SRCS = free_pocket.c ft_free.c ft_free_utilis.c
 
 
 OBJECT = $(SRCS:.c=.o) 

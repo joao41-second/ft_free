@@ -5,42 +5,27 @@
 #                                                     +:+ +:+         +:+      #
 #    By: jperpect <jperpect@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/03 06:17:31 by jperpect          #+#    #+#              #
-#    Updated: 2024/11/29 14:25:46 by jperpct          ###   ########.fr        #
+#    Created: 2024/05/08 14:51:15 by jperpect          #+#    #+#              #
+#    Updated: 2024/10/17 12:04:23 by jperpct          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FLGS = -Wall -Wextra -Werror
 
-NAME = libft.a
+NAME =	free_and_list.a
 
 AR = ar rcs
 
+SRCS = list_f.c list_f_2.c ft_free.c
 
-Free_DIR = ../free/ft_free.a 
-Free = $(Free_)/ft_free.a
-
-
-SRCS = ft_atoi.c ft_isdigit.c ft_memmove.c ft_split.c ft_strlcat.c ft_strrchr.c \
- ft_bzero.c ft_isprint.c ft_memset.c ft_strlcpy.c ft_strtrim.c \
- ft_calloc.c ft_itoa.c ft_putchar_fd.c ft_strchr.c ft_strlen.c ft_substr.c \
- ft_isalnum.c ft_memchr.c ft_putendl_fd.c ft_strdup.c ft_strmapi.c ft_tolower.c \
- ft_isalpha.c ft_memcmp.c ft_putnbr_fd.c ft_striteri.c ft_strncmp.c ft_toupper.c \
- ft_isascii.c ft_memcpy.c ft_putstr_fd.c ft_strjoin.c ft_strnstr.c ft_str_btis.c ft_atol.c \
- ft_verfic_char_list.c  \
- 
-
-BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c \
-		ft_lstlast.c ft_lstadd_back.c  ft_lstdelone.c \
-		ft_lstclear.c ft_lstiter.c ft_lstmap.c ft_lstprint.c\
 
 OBJECT = $(SRCS:.c=.o) 
 
-OBJECT_B = $(BONUS:.c=.o)
 
 CC = cc 
 
 RM = rm -f
+
 
 COUNT_FILE = count.txt
 
@@ -52,33 +37,27 @@ endif
 COUNT = $(shell cat $(COUNT_FILE))
 
 
-
-.SILENT:
+#.SILENT:
 
 all: $(NAME)
 
 $(NAME): $(OBJECT)
-	@$(AR) $@ $(Free_DIR) $^
+
+	@$(AR) $@ $^
 	@rm -f $(COUNT_FILE)
 
-bonus: $(OBJECT_B) $(NAME)
-	@ar rcs $(NAME) $(Free_DIR) $^
-	@rm -f $(COUNT_FILE)
-
-
-%.o:%.c libft.h
-	@cc -c  $(FLGS) -o $@ $< 
+%.o:%.c list_and_free.a
+	@cc -c $(FLGS) -o $(LIB) $@ $< 
 	$(eval COUNT=$(shell echo $$(( $(COUNT) + 1 ))))
-
-	# Salva o novo valor de COUNT no arquivo
-	@$(MAKE) show_progress
 	@echo $(COUNT) > $(COUNT_FILE)
+	@$(MAKE) -s show_progress
 
+	
 
 show_progress:
 	@clear
 
-	@PERCENT=$$(($(COUNT) * 100 / $(words $(SRCS)))); \
+	@PERCENT=$$(($(COUNT) * 100 / $(words $(SRCS)) )); \
 	PROG_LEN=$$(($$PERCENT / 10)); \
 	echo -n "  $(NAME) ["; \
 	for i in `seq 1 $$PROG_LEN`; do \
@@ -90,20 +69,18 @@ show_progress:
 	echo "] $$PERCENT%"
 
 
-clean:
-	$(RM)  $(OBJECT) $(OBJECT_B)
-		@rm -f $(COUNT_FILE)
 
+clean:
+	$(RM) $(OBJECT)
+	@rm -f $(COUNT_FILE)
 fclean: clean
 	$(RM) $(NAME)
-		@rm -f $(COUNT_FILE)
+	@rm -f $(COUNT_FILE) 
 
 re: fclean all
 
 exec:
-	cc	-g $(FLGS)  $(SRCS) $(BONUS) -lbsd
-		@rm -f $(COUNT_FILE)
+	cc	-g   $(SRCS) $(BONUS) -lbsd
 
-norm: 
-	yes y | python3 -m c_formatter_42 -c $(SRCS)
-		@rm -f $(COUNT_FILE)
+# norm: 
+#    yes y|	python3 -m c_formatter_42 -c $(BONUS)

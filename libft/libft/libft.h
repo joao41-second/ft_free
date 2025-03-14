@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
 # define LIBFT_H
+#ifdef LIBFT_H
 
 # include <aio.h>
 # include <stdio.h>
@@ -19,7 +19,7 @@
 # include <string.h>
 # include <strings.h>
 # include <unistd.h>
-# include "../free/free_and_list.h"
+# include "../free/ft_free.h"
 
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);

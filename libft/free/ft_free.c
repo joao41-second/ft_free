@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "free_and_list.h" 
+#include "ft_free.h" 
 
 void	*ft_malloc(size_t size, void *pocket)
 {
@@ -31,7 +31,7 @@ void	*ft_malloc(size_t size, void *pocket)
 		return (write(2,"error: pocket not valid\n",25),NULL);
 	if(new_node->content == NULL)
 		ft_free_all();	
-	ft_node_add_front(&list, new_node);
+	ff_node_add_front(&list, new_node);
 	pocket_var = new_node->content;
 	return (pocket_var->memory);
 }

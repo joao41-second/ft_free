@@ -10,8 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#define FREE_AND_LIST_H
-#ifdef FREE_AND_LIST_H
+
+
+#ifndef FT_FREE_H
+#define FT_FREE_H
 
 #define START 2
 #define END   3
@@ -22,11 +24,19 @@
 # define TRUE 0
 # define FALSE 1
 
-# include "list.h"
 # include <aio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+
+typedef struct s_list_
+{
+	void			*content;
+	struct s_list_	*next;
+	struct s_list_	*previous;
+}					t_list_;
+
+
 
 typedef struct s_free_list
 {
@@ -106,5 +116,7 @@ int	ff_strncmp(const char *s1, const char *s2, size_t n);
 
 int ff_strlen(char *str);
 
+// list
+void	ff_node_add_front(t_list_ **lst, t_list_ *new_);
 
 #endif

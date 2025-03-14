@@ -8,7 +8,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "free_and_list.h" 
+#include "ft_free.h" 
 #include <stdlib.h>
 
 int ff_strlen(char *str)
@@ -53,6 +53,49 @@ char *ff_strdup(char *str)
 	return (dup);	
 }
 
+//lsit_
+void	ff_node_add_front(t_list_ **lst, t_list_ *new_)
+{
+	t_list_	*temp;
+
+	if (lst == NULL || new_ == NULL)
+		return ;
+	new_->previous = *lst;
+	temp = *lst;
+	temp->next = new_;
+	*lst = new_;
+}
+
+t_list_	*ff_node_start(t_list_ *list)
+{
+	if (list->previous != NULL)
+	{
+		while (list != NULL)
+		{
+			if (list->previous == NULL)
+				break ;
+			list = list->previous;
+		}
+	}
+	return (list);
+}
+t_list_	*ff_node_end(t_list_ *list)
+{
+	if (list->next != NULL)
+	{
+		while (list != NULL)
+		{
+			if (list->next == NULL)
+				break ;
+			list = list->next;
+		}
+	}
+	return (list);
+}
+
+
+
+
 void free_struct_free(t_free_list *node)
 {
 	free(node->memory);
@@ -96,9 +139,9 @@ t_list_* get_list_free(int n)
 		}
 	}
 	if(n == END)
-		list = ft_node_end(list);
+		list = ff_node_end(list);
 	if(n == START)
-		list = ft_node_start(list);
+		list = ff_node_start(list);
 	return(list);
 }
 
@@ -136,12 +179,12 @@ t_list_ *get_pocket_list(int n,char *set)
 			return(free(star),free(list_pocket),NULL);
 	}
 	if(n == END)
-		return(ft_node_end(list_pocket));
+		return(ff_node_end(list_pocket));
 	if(n == START)
-		return(ft_node_start(list_pocket));
+		return(ff_node_start(list_pocket));
 	if(n == SETD && set != NULL)
 		setd = set;
-	list_pocket = ft_node_start(list_pocket);
+	list_pocket = ff_node_start(list_pocket);
 	if(n == SETD && set == NULL ){
 		while (list_pocket != NULL) 
 		{
@@ -183,6 +226,6 @@ void ft_pocket_new(char *name)
 	new_node = ft_node_new_free(dup);
 	if(new_node == NULL)
 		return;
-	ft_node_add_front(&list_pocket,new_node);
+	ff_node_add_front(&list_pocket,new_node);
 	get_pocket_list(SETD, dup);
 }

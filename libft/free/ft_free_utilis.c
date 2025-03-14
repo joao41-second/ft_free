@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./free_and_list.h"
+#include "ft_free.h"
 #include <unistd.h>
 
 t_list_	*ft_node_new_free(void *n)
@@ -75,13 +75,13 @@ void *ft_add_memory(void *memory,char *pocket)
 	{
 		node = malloc(1*(sizeof(t_free_list)));
 		if(node == NULL)
-			ft_free_all(NULL);
+			ft_free_all();
 		if(pocket == NULL)
 			node->pocket = ff_strdup("main");
 		else
 			node->pocket = ff_strdup(pocket);
 		if(node == NULL)
-			return (free(node),ft_free_all(NULL),NULL);
+			return (free(node),ft_free_all(),NULL);
 		node->memory = memory;
 	}
 	list = get_list_free(END);	
@@ -91,5 +91,5 @@ void *ft_add_memory(void *memory,char *pocket)
 		new_node = ft_node_new_free(node);
 	else 
 		return (write(2,"error: pocket not valid\n",25),NULL);
-	return (ft_node_add_front(&list, new_node),memory);
+	return (ff_node_add_front(&list, new_node),memory);
 }

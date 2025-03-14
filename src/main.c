@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 void print_free_list()
 {
 	t_list_ *list;
@@ -55,6 +56,7 @@ int	main(int ac, char **av, char **env)
 {
 	(void)ac;
 	char *ok;
+	ft_strdup("oi");
 	ft_start_alloc();
 
 	ft_malloc(10,NULL);
