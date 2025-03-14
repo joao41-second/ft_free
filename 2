@@ -106,7 +106,7 @@ void unset_pocket(char *name_pocket)
 				list_prev->next = list_next;
 			if(list_next != NULL)
 				list_next->previous = list_prev;
-			list = get_pocket_list(SETD, list_prev->content);
+			get_pocket_list(SETD, list_prev->content);
 			
 		}
 	
@@ -133,7 +133,6 @@ void ft_free_all_pocket(char *name_pocket)
 		}
 		list = list->next;
 	}
-	unset_pocket(name_pocket);
 
 }
 

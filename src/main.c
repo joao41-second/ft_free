@@ -77,7 +77,9 @@ int	main(int ac, char **av, char **env)
 	print_pocket_list();
 	print_free_list();
 	ft_free_all_pocket("ola");
-	ft_free(ok);
+	print_pocket_list();
+
+//	ft_free(ok);
 	printf("\n");
 	print_free_list();
 //	ft_printf("list peketd is %s ",list->content);
