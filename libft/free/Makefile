@@ -6,18 +6,18 @@
 #    By: jperpect <jperpect@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 14:51:15 by jperpect          #+#    #+#              #
-#    Updated: 2024/10/17 12:04:23 by jperpct          ###   ########.fr        #
+#    Updated: 2025/03/14 23:11:52 by jperpct          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FLGS = -Wall -Wextra -Werror
 
-NAME =	ft_free.a
+NAME = ft_free.a
 
 AR = ar rcs
 
-SRCS = free_pocket.c ft_free.c ft_free_utilis.c
-
+SRCS = ft_free.c ft_free_utilis.c ft_free_pocket.c ft_list.c ft_string.c ft_struct_free.c\
+ 
 
 OBJECT = $(SRCS:.c=.o) 
 
@@ -26,38 +26,43 @@ CC = cc
 
 RM = rm -f
 
-
 COUNT_FILE = count.txt
 
 # Verifica se o arquivo existe; se não, cria com valor inicial 0
 ifeq ($(wildcard $(COUNT_FILE)),)
-    $(shell echo 0 > $(COUNT_FILE))
+    @$(shell echo 0 > $(COUNT_FILE))
 endif
 
 COUNT = $(shell cat $(COUNT_FILE))
 
 
-#.SILENT:
+
+.SILENT:
 
 all: $(NAME)
 
 $(NAME): $(OBJECT)
-
 	@$(AR) $@ $^
 	@rm -f $(COUNT_FILE)
 
-%.o:%.c list_and_free.a
-	@cc -c $(FLGS) -o $(LIB) $@ $< 
+bonus: $(OBJECT_B) $(NAME)
+	@ar rcs $(NAME) $(Free_DIR) $^
+	@rm -f $(COUNT_FILE)
+
+
+%.o:%.c $(NAME)
+	@cc -c  $(FLGS) -o $@ $< 
 	$(eval COUNT=$(shell echo $$(( $(COUNT) + 1 ))))
+
+	# Salva o novo valor de COUNT no arquivo
+	@$(MAKE) show_progress
 	@echo $(COUNT) > $(COUNT_FILE)
-	@$(MAKE) -s show_progress
 
-	
 
-show_progress:
-	@clear
+show_progress:	
+	clear
 
-	@PERCENT=$$(($(COUNT) * 100 / $(words $(SRCS)) )); \
+	@PERCENT=$$(($(COUNT) * 100 / $(words $(SRCS)))); \
 	PROG_LEN=$$(($$PERCENT / 10)); \
 	echo -n "  $(NAME) ["; \
 	for i in `seq 1 $$PROG_LEN`; do \
@@ -69,18 +74,12 @@ show_progress:
 	echo "] $$PERCENT%"
 
 
-
 clean:
-	$(RM) $(OBJECT)
-	@rm -f $(COUNT_FILE)
+	$(RM)  $(OBJECT) $(OBJECT_B)
+		@rm -f $(COUNT_FILE)
+
 fclean: clean
 	$(RM) $(NAME)
-	@rm -f $(COUNT_FILE) 
+		@rm -f $(COUNT_FILE)
 
 re: fclean all
-
-exec:
-	cc	-g   $(SRCS) $(BONUS) -lbsd
-
-# norm: 
-#    yes y|	python3 -m c_formatter_42 -c $(BONUS)

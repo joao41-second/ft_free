@@ -64,20 +64,21 @@ $(NAME): $(OBJECT)
 bonus: $(OBJECT_B) $(NAME)
 	@ar rcs $(NAME) $(Free_DIR) $^
 	@rm -f $(COUNT_FILE)
+	
 
 
-%.o:%.c libft.h
+%.o:%.c $(NAME)
 	@cc -c  $(FLGS) -o $@ $< 
 	$(eval COUNT=$(shell echo $$(( $(COUNT) + 1 ))))
 
 	# Salva o novo valor de COUNT no arquivo
 	@$(MAKE) show_progress
-	@echo $(COUNT) > $(COUNT_FILE)
+	@echo $(COUNT) > $(COUNT_FILE)	
 
 
-show_progress:
-	@clear
+show_progress:	
 
+	clear
 	@PERCENT=$$(($(COUNT) * 100 / $(words $(SRCS)))); \
 	PROG_LEN=$$(($$PERCENT / 10)); \
 	echo -n "  $(NAME) ["; \
@@ -88,6 +89,7 @@ show_progress:
 		echo -n " "; \
 	done; \
 	echo "] $$PERCENT%"
+
 
 
 clean:

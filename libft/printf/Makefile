@@ -49,14 +49,14 @@ $(NAME): $(OBJECT)
 %.o:%.c libftprintf.a
 	@cc -c $(FLGS) -o $@ $< 
 	$(eval COUNT=$(shell echo $$(( $(COUNT) + 1 ))))
-
 	@echo $(COUNT) > $(COUNT_FILE)
+
 	@$(MAKE) -s show_progress
 
 	
 
 show_progress:
-	@clear
+	clear
 
 	@PERCENT=$$(($(COUNT) * 100 / $(words $(SRCS)) )); \
 	PROG_LEN=$$(($$PERCENT / 10)); \

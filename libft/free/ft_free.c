@@ -137,8 +137,4 @@ void ft_free_all_pocket(char *name_pocket)
 
 }
 
-void	ft_start_alloc(void)
-{
-	 get_list_free(0);
-	 get_pocket_list(0, NULL);
-}
+

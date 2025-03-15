@@ -11,139 +11,6 @@
 #include "ft_free.h" 
 #include <stdlib.h>
 
-int ff_strlen(char *str)
-{
-	int i;
-	i = 0;
-	while(str[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
-
-int	ff_strncmp(const char *s1, const char *s2, size_t n)
-{
-	size_t	a;
-
-	a = 0;
-	if (n == 0)
-		return (0);
-	while ((s1[a] != '\0' && s2[a] != '\0') && a < n - 1)
-	{
-		if (s1[a] != s2[a])
-			return ((unsigned char)s1[a] - (unsigned char)s2[a]);
-		a++;
-	}
-	return ((unsigned char)s1[a] - (unsigned char)s2[a]);
-}
-
-char *ff_strdup(char *str)
-{
-	char *dup;
-	int i;
-
-	i = -1;
-	dup = malloc(ff_strlen(str)+1*sizeof(char));
-	if(dup == NULL)
-		return (NULL);
-	while (str[++i] != '\0') 
-	 dup[i] = str[i];
-	dup[i]= '\0';
-	return (dup);	
-}
-
-//lsit_
-void	ff_node_add_front(t_list_ **lst, t_list_ *new_)
-{
-	t_list_	*temp;
-
-	if (lst == NULL || new_ == NULL)
-		return ;
-	new_->previous = *lst;
-	temp = *lst;
-	temp->next = new_;
-	*lst = new_;
-}
-
-t_list_	*ff_node_start(t_list_ *list)
-{
-	if (list->previous != NULL)
-	{
-		while (list != NULL)
-		{
-			if (list->previous == NULL)
-				break ;
-			list = list->previous;
-		}
-	}
-	return (list);
-}
-t_list_	*ff_node_end(t_list_ *list)
-{
-	if (list->next != NULL)
-	{
-		while (list != NULL)
-		{
-			if (list->next == NULL)
-				break ;
-			list = list->next;
-		}
-	}
-	return (list);
-}
-
-
-
-
-void free_struct_free(t_free_list *node)
-{
-	free(node->memory);
-	free(node->pocket);
-	free(node);
-	node = NULL;
-}
-
-t_free_list * inicializ_struct_free(char *str,size_t size)
-{
-	t_free_list *node;
-
-	if(str == NULL)
-		return (NULL);
-	node = malloc(sizeof(t_free_list)*1);
-	if(node == NULL)
-		return(NULL);
-	if(size > 0)
-		node->memory = malloc(size);
-	else
-		return (free(node),NULL);
-	node->pocket = str;
-	return (node);
-}
-
-
-t_list_* get_list_free(int n)
-{
-	static t_list_ * list;
-	t_free_list *list_free;
-	if(list == NULL)
-	{
-		list_free = inicializ_struct_free(ff_strdup("main"), 5);
-		if(list_free == NULL)
-			return (NULL);
-		list = ft_node_new_free(list_free);
-		if(list->content == NULL)
-		{
-			free(list);
-			return (NULL);
-		}
-	}
-	if(n == END)
-		list = ff_node_end(list);
-	if(n == START)
-		list = ff_node_start(list);
-	return(list);
-}
 
 int chek_pocket_in_list(char *name)
 {
@@ -161,22 +28,32 @@ int chek_pocket_in_list(char *name)
 	return (FALSE);
 }
 
+void * check_pocket_NULL(t_list_ **list_pocket,char *star,char **setd)
+{
+	if( *list_pocket == NULL)
+	{
+		star = ff_strdup("main");
+		if(star == NULL)
+			return NULL;
+		*setd = star;
+		if(star == NULL)
+			return NULL;
+		*list_pocket = ft_node_new_free(star);
+		if(list_pocket == NULL)
+			return(free(star),free(list_pocket),NULL);
+	}
+	return("oi");
+}
+
 t_list_ *get_pocket_list(int n,char *set)
 {
 	static t_list_ *list_pocket;
 	static char *setd;
 	char *star = NULL;
-	if( list_pocket == NULL)
+
+	if(check_pocket_NULL(&list_pocket, star, &setd) == NULL)
 	{
-		star = ff_strdup("main");
-		if(star == NULL)
-			return NULL;
-		setd = star;
-		if(star == NULL)
-			return NULL;
-		list_pocket = ft_node_new_free(star);
-		if(list_pocket == NULL)
-			return(free(star),free(list_pocket),NULL);
+		return (NULL);
 	}
 	if(n == END)
 		return(ff_node_end(list_pocket));

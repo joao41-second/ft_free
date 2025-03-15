@@ -84,7 +84,7 @@ clean:
 	cd ./libft/Get_next_line/ && make clean
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM)  $(NAME)
 
 re: fclean all
 

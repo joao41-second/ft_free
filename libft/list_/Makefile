@@ -55,7 +55,7 @@ bonus: $(OBJECT_B) $(NAME)
 	@rm -f $(COUNT_FILE)
 
 
-%.o:%.c libft.h
+%.o:%.c $(NAME)
 	@cc -c  $(FLGS) -o $@ $< 
 	$(eval COUNT=$(shell echo $$(( $(COUNT) + 1 ))))
 
@@ -65,7 +65,8 @@ bonus: $(OBJECT_B) $(NAME)
 
 
 show_progress:
-	@clear
+	clear
+
 
 	@PERCENT=$$(($(COUNT) * 100 / $(words $(SRCS)))); \
 	PROG_LEN=$$(($$PERCENT / 10)); \

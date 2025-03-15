@@ -6,7 +6,7 @@
 /*   By: jperpct <jperpect@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 11:19:37 by jperpct           #+#    #+#             */
-/*   Updated: 2025/03/14 22:32:47 by jperpct          ###   ########.fr       */
+/*   Updated: 2025/03/14 23:00:04 by jperpct          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,32 @@ typedef struct s_free_list
 
 } t_free_list;
 
+
+//------------------------START------------------------------//
+/**
+ * @brief the start the library the malloc not use not 
+ * possible use neither the all function
+ */
+void	ft_start_alloc(void);
+
+//-------------------------ALOC-------------------------------//
+
 /**
  * @brief this function is used for allocate memory 
  * @param size nuber bits for alocade 
- * @param list_set set is null;
+ * @param pocket use for alocad memory pocket;
  */
-void	*ft_malloc(size_t size, void *list_set);
+void	*ft_malloc(size_t size, void *pocket);
+
+/**
+ * @brief this function add memory in linked list 
+ * pocket name the pocket (opcion)
+ * memory pointer or memory 
+ */
+void *ft_add_memory(void *memory,char *pocket);
+
+
+//---------------------------FREE-----------------------------//
 
 /**
  * @brief this function is used to free memory of the program 
@@ -53,24 +73,17 @@ void	ft_free_all();
 
 /**
  * @brief this function is used for free in specifly variabel
- * @param var for free memory
- * @param list_set set ins null
  */
 void	ft_free(void *var);
-
 /**
- * @brief the start the library the malloc not use not 
- * possible use neither the all function
+ * @brief free the all memory the pocket specific (not valid main pocket)
+ * @param name the pocket
  */
-void	ft_start_alloc(void);
+void ft_free_all_pocket(char *name_pocket);
 
-/**
- * @brief alloc the memory reght for Created new node t_list_
- *
- * @param n variabel used in list
- * @return node t_list_ alocad with memory alocade
- */
-t_list_	*ft_node_new_free(void *n);
+
+//---------------------------------------------------------//
+
 
 // utilis.c
 t_list_	*ft_maolloc_next(t_list_ *list_set, t_list_ *list, size_t size);
@@ -81,25 +94,28 @@ void	ft_remove(t_list_ **node);
 
 t_list_	*free_next(t_list_ *list);
 
-void free_struct_free(t_free_list *node);
+//geters
 
 t_list_* get_list_free(int n);
 
 
+t_list_ *get_pocket_list(int n,char *set);
+
+//struct
+
+void free_struct_free(t_free_list *node);
 
 t_free_list * inicializ_struct_free(char *str,size_t size);
 
-void *ft_add_memory(void *memory,char *pocket);
+
+//pocket
 
 int chek_pocket_in_list(char *name);
 
 void ft_pocket_new(char *name);
 
-t_list_ *get_pocket_list(int n,char *set);
-
-void ft_free_all_pocket(char *name_pocket);
-
 void ft_pocket_set(char *name);
+
 
 // str
 
@@ -110,6 +126,18 @@ int	ff_strncmp(const char *s1, const char *s2, size_t n);
 int ff_strlen(char *str);
 
 // list
+
 void	ff_node_add_front(t_list_ **lst, t_list_ *new_);
+
+t_list_	*ff_node_end(t_list_ *list);
+
+t_list_	*ff_node_start(t_list_ *list);
+
+/**
+ * @brief alloc the memory reght for Created new node t_list_
+ * @param n variabel used in list
+ * @return node t_list_ alocad with memory alocade
+ */
+t_list_	*ft_node_new_free(void *n);
 
 #endif
