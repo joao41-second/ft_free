@@ -3,101 +3,83 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rui <rui@student.42.fr>                    +#+  +:+       +#+         #
+#    By: jperpect <jperpect@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/03 06:17:31 by jperpect          #+#    #+#              #
-#    Updated: 2025/03/14 22:48:59 by jperpct          ###   ########.fr        #
+#    Created: 2024/05/08 14:51:15 by jperpect          #+#    #+#              #
+#    Updated: 2025/03/14 23:11:52 by jperpct          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Compiler flags
-#WFLGS = -Wall -Wextra -Werror
-#READ_FLG = -g 
+FLGS = -Wall -Wextra -Werror
 
-Libft_dir = ./libft/libft
-libft = $(Libft_dir)/libft
+NAME = ft_free.a
 
-
-FLGS_LIB = $(Libft_dir)/libft.a ./libft/free/ft_free.a ./libft/list_/lsit.a ./libft/printf/libftprintf.a
-FLGS = $(WFLGS) $(READ_FLG) 
-
-VAL = valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --trace-children=yes --suppressions=readline.supp 
-
-# Make flags
-MAKEFLAGS += -s
-
-# Source files
-SRCS = $(shell find src -name '*.c')
-
-# Object files
-OBJS = $(patsubst src/%.c,$(OBJDIR)/%.o,$(SRCS))
-
-# Libraries
-LIB = ./libft/libft/libft.a 
-
-# Commands
 AR = ar rcs
-CC = cc
+
+SRCS = ft_free.c ft_free_utilis.c ft_free_pocket.c ft_list.c ft_string.c ft_struct_free.c\
+ 
+
+OBJECT = $(SRCS:.c=.o) 
+
+
+CC = cc 
+
 RM = rm -f
-CAT = cat number.txt
 
-# Output
-NAME = minishell
-OBJDIR = Objs
+COUNT_FILE = count.txt
 
-# Create object directory if it doesn't exist
-$(shell mkdir -p $(OBJDIR))
+# Verifica se o arquivo existe; se não, cria com valor inicial 0
+ifeq ($(wildcard $(COUNT_FILE)),)
+    @$(shell echo 0 > $(COUNT_FILE))
+endif
 
-$(OBJDIR)/%.o: src/%.c
-	@mkdir -p $(dir $@)
-	@$(CC) -c $(FLGS) -o $@ $<
+COUNT = $(shell cat $(COUNT_FILE))
 
 
-# Main target
-$(NAME): $(OBJS)
-	cd libft/free && make 
-	cd libft/libft && make bonus
-	cd libft/list_ && make 
-	cd libft/printf && make
-	cd libft/Get_next_line && make
-	$(CC) $(OBJS)  $(FLGS_LIB) $(FLGS) -o $(NAME)
-	@echo "╔══════════════════════════╗"
-	@echo "║ ✅ Compiled Successfully!║"
-	@echo "╚══════════════════════════╝"
 
-# Compile all source files
-$(OBJDIR)/%.o: src/%.c
-	@mkdir -p $(dir $@)
-	@$(CC) -c $(FLGS) -o $@ $<
-
-# Phony targets
-.PHONY: all clean fclean re exec norm normi
+.SILENT:
 
 all: $(NAME)
 
+$(NAME): $(OBJECT)
+	@$(AR) $@ $^
+	@rm -f $(COUNT_FILE)
+
+bonus: $(OBJECT_B) $(NAME)
+	@ar rcs $(NAME) $(Free_DIR) $^
+	@rm -f $(COUNT_FILE)
+
+
+%.o:%.c $(NAME)
+	@cc -c  $(FLGS) -o $@ $< 
+	$(eval COUNT=$(shell echo $$(( $(COUNT) + 1 ))))
+
+	# Salva o novo valor de COUNT no arquivo
+	@$(MAKE) show_progress
+	@echo $(COUNT) > $(COUNT_FILE)
+
+
+show_progress:	
+	clear
+
+	@PERCENT=$$(($(COUNT) * 100 / $(words $(SRCS)))); \
+	PROG_LEN=$$(($$PERCENT / 10)); \
+	echo -n "  $(NAME) ["; \
+	for i in `seq 1 $$PROG_LEN`; do \
+		echo -n "#"; \
+	done; \
+	for i in `seq $$PROG_LEN 10`; do \
+		echo -n " "; \
+	done; \
+	echo "] $$PERCENT%"
+
+
 clean:
-	$(RM) -r $(OBJDIR)
-	cd ./libft/libft/ && make clean
-	cd ./libft/free/  && make clean
-	cd ./libft/list_/  && make clean
-	cd ./libft/printf/  && make clean
-	cd ./libft/Get_next_line/ && make clean
+	$(RM)  $(OBJECT) $(OBJECT_B)
+		@rm -f $(COUNT_FILE)
 
 fclean: clean
-	$(RM)  $(NAME)
+	$(RM) $(NAME)
+		@rm -f $(COUNT_FILE)
 
 re: fclean all
-
-exec:
-	$(CC) -g $(FLGS) $(SRCS)
-
-norm:
-	yes y| python3 -m c_formatter_42 -c $(SRCS)
-
-normi:
-	norminette $(SRCS)
-	cd ./libft && norminette
-
-s:
-	clear && make re 
-
