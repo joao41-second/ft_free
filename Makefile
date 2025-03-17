@@ -29,12 +29,8 @@ RM = rm -f
 COUNT_FILE = count.txt
 
 # Verifica se o arquivo existe; se não, cria com valor inicial 0
-ifeq ($(wildcard $(COUNT_FILE)),)
-    @$(shell echo 0 > $(COUNT_FILE))
-endif
 
 COUNT = $(shell cat $(COUNT_FILE))
-
 
 
 .SILENT:
@@ -55,8 +51,6 @@ bonus: $(OBJECT_B) $(NAME)
 	$(eval COUNT=$(shell echo $$(( $(COUNT) + 1 ))))
 
 	# Salva o novo valor de COUNT no arquivo
-	@$(MAKE) show_progress
-	@echo $(COUNT) > $(COUNT_FILE)
 
 
 show_progress:	
@@ -80,6 +74,5 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
-		@rm -f $(COUNT_FILE)
 
 re: fclean all
