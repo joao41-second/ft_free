@@ -6,18 +6,20 @@
 /*   By: jperpct <jperpect@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 14:16:04 by jperpct           #+#    #+#             */
-/*   Updated: 2025/03/13 16:25:15 by jperpct          ###   ########.fr       */
+/*   Updated: 2025/03/17 11:04:27 by jperpct          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_free.h"
+#include "lsit_struct.h"
 #include <unistd.h>
 
 t_list_	*ft_node_new_free(void *n)
 {
 	t_list_	*new_node;
-	if(n == NULL)
-		return NULL;
+
+	if (n == NULL)
+		return (NULL);
 	new_node = (t_list_ *)malloc(1 * sizeof(t_list_));
 	if (new_node == NULL)
 		return (NULL);
@@ -65,31 +67,31 @@ t_list_	*free_next(t_list_ *list)
 	return (list);
 }
 
-void *ft_add_memory(void *memory,char *pocket)
+void	*ft_add_memory(void *memory, char *pocket)
 {
-	t_list_ *new_node;
-	t_free_list *node;
-	t_list_ *list;
+	t_list_		*new_node;
+	t_free_list	*node;
+	t_list_		*list;
 
-	if(chek_pocket_in_list(pocket) == TRUE || pocket == NULL)
+	if (chek_pocket_in_list(pocket) == TRUE || pocket == NULL)
 	{
-		node = malloc(1*(sizeof(t_free_list)));
-		if(node == NULL)
+		node = malloc(1 *(sizeof(t_free_list)));
+		if (node == NULL)
 			ft_free_all();
-		if(pocket == NULL)
+		if (pocket == NULL)
 			node->pocket = ff_strdup("main");
 		else
 			node->pocket = ff_strdup(pocket);
-		if(node == NULL)
-			return (free(node),ft_free_all(),NULL);
+		if (node == NULL)
+			return (free(node), ft_free_all(), NULL);
 		node->memory = memory;
 	}
-	list = get_list_free(END);	
-	if(pocket == NULL)
+	list = get_list_free(END);
+	if (pocket == NULL)
 		new_node = ft_node_new_free(node);
-	else if(chek_pocket_in_list(pocket) == TRUE)
+	else if (chek_pocket_in_list(pocket) == TRUE)
 		new_node = ft_node_new_free(node);
-	else 
-		return (write(2,"error: pocket not valid\n",25),NULL);
-	return (ff_node_add_front(&list, new_node),memory);
+	else
+		return (write(2, "error: pocket not valid\n", 25), NULL);
+	return (ff_node_add_front(&list, new_node), memory);
 }

@@ -6,7 +6,7 @@
 /*   By: jperpct <jperpect@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 22:57:08 by jperpct           #+#    #+#             */
-/*   Updated: 2025/03/14 22:57:31 by jperpct          ###   ########.fr       */
+/*   Updated: 2025/03/17 11:04:50 by jperpct          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ t_list_	*ff_node_end(t_list_ *list)
 
 void	ft_start_alloc(void)
 {
-	 get_list_free(0);
-	 get_pocket_list(0, NULL);
+	get_list_free(0);
+	get_pocket_list(0, NULL);
 }
-
