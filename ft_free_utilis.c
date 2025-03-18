@@ -6,7 +6,7 @@
 /*   By: jperpct <jperpect@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 14:16:04 by jperpct           #+#    #+#             */
-/*   Updated: 2025/03/17 11:04:27 by jperpct          ###   ########.fr       */
+/*   Updated: 2025/03/18 10:16:38 by jperpct          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ void	*ft_add_memory(void *memory, char *pocket)
 	t_free_list	*node;
 	t_list_		*list;
 
-	if (chek_pocket_in_list(pocket) == TRUE || pocket == NULL)
+	if (chek_pocket_in_list(pocket) == TRUE)
 	{
 		node = malloc(1 *(sizeof(t_free_list)));
 		if (node == NULL)
 			ft_free_all();
 		if (pocket == NULL)
-			node->pocket = ff_strdup("main");
+			node->pocket = ff_strdup(get_pocket_list(SETD, NULL)->content);
 		else
 			node->pocket = ff_strdup(pocket);
 		if (node == NULL)

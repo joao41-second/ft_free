@@ -6,7 +6,7 @@
 /*   By: jperpct <jperpect@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 10:46:49 by jperpct           #+#    #+#             */
-/*   Updated: 2025/03/17 10:57:32 by jperpct          ###   ########.fr       */
+/*   Updated: 2025/03/18 10:14:21 by jperpct          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	chek_pocket_in_list(char *name)
 {
 	t_list_		*list_pocket;
 
+	if (name == NULL)
+		return (TRUE);
 	list_pocket = get_pocket_list(START, NULL);
 	while (list_pocket != NULL)
 	{
