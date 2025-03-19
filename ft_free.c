@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_free.h" 
+#include "lsit_struct.h"
 
 void	*ft_malloc(size_t size, void *pocket)
 {
@@ -87,23 +88,23 @@ void	ft_free(void *var)
 	list = temp;
 }
 
-void	unset_pocket(char *name_pocket)
+void	unset_pocket(char *n)
 {
 	t_list_	*list;
 	t_list_	*list_prev;
 	t_list_	*list_next;
+	t_list_	*temp;
 
 	list = get_pocket_list(START, NULL);
 	while (list != NULL)
 	{
-		if (ff_strncmp(list->content, name_pocket,
-				ff_strlen(name_pocket) + 10) == 0
+		if (ff_strncmp(list->content, n, ff_strlen(n) + 10) == 0
 			&& ff_strncmp(list->content, "main", ff_strlen("main")) != 0)
 		{
 			list_prev = list->previous;
 			list_next = list->next;
 			free(list->content);
-			free(list);
+			temp = list;
 			if (list_prev != NULL)
 				list_prev->next = list_next;
 			if (list_next != NULL)
@@ -112,6 +113,8 @@ void	unset_pocket(char *name_pocket)
 		}
 		list = list->next;
 	}
+	if (temp)
+		free(temp);
 }
 
 void	ft_free_all_pocket(char *name_pocket)
