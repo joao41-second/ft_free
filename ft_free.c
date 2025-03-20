@@ -6,7 +6,7 @@
 /*   By: jperpct <jperpect@student.42porto.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 10:33:39 by jperpct           #+#    #+#             */
-/*   Updated: 2025/03/13 16:30:30 by jperpct          ###   ########.fr       */
+/*   Updated: 2025/03/20 13:59:26 by jperpct          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	*ft_malloc(size_t size, void *pocket)
 	t_list_		*pocket_setd;
 	t_free_list	*pocket_var;
 
+	if(size == 0)
+		return(NULL);
 	list = get_list_free(END);
 	pocket_setd = get_pocket_list(SETD, NULL);
 	if (pocket_setd == NULL)
